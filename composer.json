@@ -1,6 +1,6 @@
 {
-    "name": "yudijohn/admin-lte",
-    "description": "AdminLTE admin tempate.",
+    "name": "yudijohn/metronic-skeleton",
+    "description": "Metronic admin dashboard for Laravel project.",
     "type": "template",
     "authors": [
         {
