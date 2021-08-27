@@ -27,7 +27,7 @@ class MetronicServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/views', 'metronic' );
         $this->publishes( [
             __DIR__.'/plugins' => base_path( 'public/plugins/yudijohn/metronic' ),
-            __DIR__.'/views' => resource_path( 'views/vendor/yudijohn/metronic-skeleton' ),
+            __DIR__.'/views' => resource_path( 'views/vendor/metronic' ),
         ] );
         $this->app[ 'router' ]->pushMiddlewareToGroup( 'web', Middleware\CustomForms::class );
     }
