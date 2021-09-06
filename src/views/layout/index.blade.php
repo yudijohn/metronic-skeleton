@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+		<title>{{ config( 'app.name' ) }}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta charset="utf-8" />
 		<!--begin::Fonts-->
@@ -8,6 +9,7 @@
 		<!--end::Fonts-->
 		<!--begin::Page Vendor Stylesheets(used by this page)-->
 		<link href="{{ asset( 'plugins/yudijohn/metronic/plugins/fullcalendar/fullcalendar.bundle.css' ) }}" rel="stylesheet" type="text/css" />
+		@stack( 'styles' )
 		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
 		<link href="{{ asset( 'plugins/yudijohn/metronic/global/plugins.bundle.css' ) }}" rel="stylesheet" type="text/css" />
@@ -15,7 +17,7 @@
 		<!--end::Global Stylesheets Bundle-->
     </head>
 	<!--begin::Body-->
-	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
+	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
 		<!--begin::Main-->
 		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">
@@ -31,17 +33,6 @@
 					<!--end::Header-->
 					<!--begin::Content-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						@hasSection( 'toolbar' )
-							<!--begin::Toolbar-->
-							<div class="toolbar" id="kt_toolbar">
-								<!--begin::Container-->
-								<div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
-									@yield( 'toolbar' )
-								</div>
-								<!--end::Container-->
-							</div>
-							<!--end::Toolbar-->
-						@endif
 						<!--begin::Post-->
 						<div class="post d-flex flex-column-fluid" id="kt_post">
 							<!--begin::Container-->
@@ -85,13 +76,8 @@
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Vendors Javascript(used by this page)-->
 		<script src="{{ asset( 'plugins/yudijohn/metronic/plugins/fullcalendar/fullcalendar.bundle.js' ) }}"></script>
+		@stack( 'scripts' )
 		<!--end::Page Vendors Javascript-->
-		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="assets/js/custom/widgets.js"></script>
-		<script src="assets/js/custom/apps/chat/chat.js"></script>
-		<script src="assets/js/custom/modals/create-app.js"></script>
-		<script src="assets/js/custom/modals/upgrade-plan.js"></script>
-		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
 	</body>
 	<!--end::Body-->

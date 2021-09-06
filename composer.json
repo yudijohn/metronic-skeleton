@@ -10,7 +10,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "laravelcollective/html": "^6.2"
+        "laravelcollective/html": "^6.2",
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "extra": {
         "laravel": {
