@@ -25,11 +25,11 @@ class MetronicServiceProvider extends ServiceProvider
     {
         // require __DIR__.'/helpers/helpers.php';
         $this->loadMigrationsFrom( __DIR__.'/database/migrations' );
-        $this->loadViewsFrom( __DIR__.'/views', 'metronic' );
+        $this->loadViewsFrom( __DIR__.'/../resources/views', 'metronic' );
         $this->publishes( [
             // __DIR__.'/Resources' => base_path( 'app/Http/Resources' ),
             __DIR__.'/plugins' => base_path( 'public/plugins/yudijohn/metronic' ),
-            __DIR__.'/views' => resource_path( 'views/vendor/metronic' ),
+            __DIR__.'/../resources/views/layout/index_parts/aside.blade.php' => resource_path( 'views/vendor/metronic/layout/index_parts/aside.blade.php' ),
         ] );
         $this->app[ 'router' ]->pushMiddlewareToGroup( 'web', Middleware\CustomForms::class );
         $this->loadRoutesFrom( __DIR__.'/../routes/admin.php' );
