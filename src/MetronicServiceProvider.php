@@ -30,6 +30,7 @@ class MetronicServiceProvider extends ServiceProvider
             // __DIR__.'/Resources' => base_path( 'app/Http/Resources' ),
             __DIR__.'/plugins' => base_path( 'public/plugins/yudijohn/metronic' ),
             __DIR__.'/../resources/views/layout/index_parts/aside.blade.php' => resource_path( 'views/vendor/metronic/layout/index_parts/aside.blade.php' ),
+            __DIR__.'/../resources/lang' => resource_path( 'lang/vendor/metronic' ),
         ] );
         $this->app[ 'router' ]->pushMiddlewareToGroup( 'web', Middleware\CustomForms::class );
         $this->loadRoutesFrom( __DIR__.'/../routes/admin.php' );

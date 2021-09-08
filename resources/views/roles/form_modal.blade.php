@@ -46,7 +46,7 @@
 								<!--begin::Checkbox-->
 								@foreach( $permissions as $permission )
 									<label class="form-check form-check-sm form-check-custom form-check-solid {{ ! $loop->last ? 'me-5 me-lg-20' : '' }}">
-										<input class="form-check-input" type="checkbox" value="true" name="permissions['{{ $key }}.{{$permission}}']" />
+										<input class="form-check-input" type="checkbox" value="{{ $key }}.{{$permission}}" name="permissions[]" />
 										<span class="form-check-label">{{ __( 'metronic::permissions.' . $permission ) }}</span>
 									</label>
 								@endforeach
