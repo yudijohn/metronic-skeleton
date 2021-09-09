@@ -27,7 +27,7 @@ class UserController extends Controller
         }
         $users->whereHas( 'roles', function( $role ) use( $request ) {
             $logged_in_user = Auth::user();
-            if( ! $logged_in_user->roles()->where( 'is_super' )->exists() ) {
+            if( ! $logged_in_user->roles()->where( 'is_super', true )->exists() ) {
                 $role->where( 'is_super', false );
             }
             if( $request->has( 'role_id' ) && ! empty( $request->role_id ) ) {
