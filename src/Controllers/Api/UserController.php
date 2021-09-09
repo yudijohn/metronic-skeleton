@@ -25,11 +25,15 @@ class UserController extends Controller
                 $user->orWhere( 'email', 'like', '%' . $request->name . '%' );
             } );
         }
-        if( $request->has( 'role_id' ) && ! empty( $request->role_id ) ) {
-            $users->whereHas( 'roles', function( $role ) use( $request ) {
+        $users->whereHas( 'roles', function( $role ) use( $request ) {
+            $logged_in_user = Auth::user();
+            if( ! $logged_in_user->roles()->where( 'is_super' )->exists() ) {
+                $role->where( 'is_super', false );
+            }
+            if( $request->has( 'role_id' ) && ! empty( $request->role_id ) ) {
                 $role->where( 'role_id', $request->role_id );
-            } );
-        }
+            }
+        } );
         return DataTables::eloquent( $users )->addColumn( 'avatar', function() {
             return asset( 'plugins/yudijohn/metronic/img/avatar.png' );
         } )->addColumn( 'role_id', function( $user ) {

@@ -211,6 +211,9 @@
 		                				url: "{{ route( 'api::users::store' ) }}",
 		                				method: 'post',
 		                				data: $( e ).serialize(),
+						                headers: {
+						                    Authorization: 'Bearer ' + '{{ Auth::user()->api_token }}',
+						                },
 		                				success: function( response ) {
 				                            i.removeAttribute( "data-kt-indicator" );
 				                            i.disabled = !1;

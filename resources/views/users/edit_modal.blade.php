@@ -195,6 +195,9 @@
 			                				url: "{{ route( 'api::users::update', ':_id' ) }}".replace( ':_id', e.querySelector( 'input[name=id]' ).value ),
 			                				method: 'put',
 			                				data: $( e ).serialize(),
+							                headers: {
+							                    Authorization: 'Bearer ' + '{{ Auth::user()->api_token }}',
+							                },
 			                				success: function( response ) {
 					                            i.removeAttribute( "data-kt-indicator" );
 					                            i.disabled = !1;

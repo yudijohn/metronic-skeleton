@@ -141,6 +141,9 @@
 		                        		url: updateRoleUrl.replace( ':_id', e.querySelector( 'input[name=id]' ).value ),
 		                        		method: 'put',
 		                        		data: $( e ).serialize(),
+						                headers: {
+						                    Authorization: 'Bearer ' + '{{ Auth::user()->api_token }}',
+						                },
 		                        		success: function( response ) {
 								        	KTUsersUpdatePermissions.udpateCallback( response.data );
 				                            i.removeAttribute("data-kt-indicator");

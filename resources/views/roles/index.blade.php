@@ -44,11 +44,11 @@
 				<div class="card-body d-flex flex-center">
 					<!--begin::Button-->
 					<button type="button" class="btn btn-clear d-flex flex-column flex-center" data-bs-toggle="modal" data-bs-target="#kt_modal_add_role">
-						<!--begin::Illustration-->
-						<img src="assets/media/illustrations/user-role.png" alt="" class="mw-100 mh-150px mb-7">
-						<!--end::Illustration-->
 						<!--begin::Label-->
-						<div class="fw-bolder fs-3 text-gray-600 text-hover-primary">Add New Role</div>
+						<div class="fw-bolder fs-3 text-gray-600 text-hover-primary">
+							<i class="bi bi-person-plus-fill fs-1"></i><br>
+							Add New Role
+						</div>
 						<!--end::Label-->
 					</button>
 					<!--begin::Button-->
@@ -77,6 +77,9 @@
 		function retrieveRole() {
 			$.ajax( {
 				url: "{{ route( 'api::roles::index' ) }}",
+                headers: {
+                    Authorization: 'Bearer ' + '{{ Auth::user()->api_token }}',
+                },
 				success: function( response ) {
 					if( response.code == 200 ) {
 						$( '#row-role .col-role' ).remove();
@@ -156,6 +159,9 @@
 				if( t.value ) {
 					$.ajax( {
 						url: deleteRoleUrl.replace( ':_id', role.id ),
+		                headers: {
+		                    Authorization: 'Bearer ' + '{{ Auth::user()->api_token }}',
+		                },
 						method: 'delete',
 						success: function( response ) {
 							retrieveRole();

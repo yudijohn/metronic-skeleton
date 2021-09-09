@@ -129,6 +129,9 @@
 		                        		url: "{{ route( 'api::roles::store' ) }}",
 		                        		method: 'post',
 		                				data: $( e ).serialize(),
+						                headers: {
+						                    Authorization: 'Bearer ' + '{{ Auth::user()->api_token }}',
+						                },
 		                        		success: function( response ) {
 								        	KTUsersAddRole.storeCallback( response.data );
 								        	r.removeAttribute( "data-kt-indicator" ), r.disabled = !1;

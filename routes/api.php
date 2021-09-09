@@ -21,9 +21,9 @@ Route::group( [ 'prefix' => 'api', 'as' => 'api::' ], function() use( $namespace
     } );
 
     Route::group( [ 'middleware' => 'api' ], function() use( $namespace ) {
-        Route::group( [ /*'middleware' => 'auth'*/ ], function() use( $namespace ) {
-            Route::group( [ 'as' => 'users::' ], function() use( $namespace ) {
-                Route::get( 'user-databale', [ 'as' => 'datatable', 'uses' => $namespace . 'UserController@datatable' ] );
+        Route::group( [ 'middleware' => 'auth:api' ], function() use( $namespace ) {
+            Route::group( [ 'prefix' => 'users', 'as' => 'users::' ], function() use( $namespace ) {
+                Route::get( 'datatable', [ 'as' => 'datatable', 'uses' => $namespace . 'UserController@datatable' ] );
                 Route::post( 'create', [  'as' => 'store', 'uses' => $namespace . 'UserController@store' ] );
                 Route::put( '{user}/edit', [  'as' => 'update', 'uses' => $namespace . 'UserController@update' ] );
                 Route::delete( '{user}/delete', [  'as' => 'destroy', 'uses' => $namespace . 'UserController@destroy' ] );

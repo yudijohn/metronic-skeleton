@@ -16,7 +16,7 @@ class AuthController extends Controller
      */
     public function store( Request $request )
     {
-        if( Auth::once( $request->only( [ 'email', 'password' ] ) ) ) {
+        if( Auth::attempt( $request->only( [ 'email', 'password' ] ) ) ) {
             return response()->json( [
                 'code' => 201,
                 'message' => 'Valid login'

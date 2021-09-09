@@ -278,6 +278,9 @@
 					$.ajax( {
 						url: deleteUserUrl.replace( ':_id', data.id ),
 						method: 'delete',
+		                headers: {
+		                    Authorization: 'Bearer ' + '{{ Auth::user()->api_token }}',
+		                },
 						success: function( response ) {
 							user_datatable.ajax.reload();
 							Swal.fire( {
@@ -330,7 +333,7 @@
             ajax: {
     			url: "{{ route( 'api::users::datatable' ) }}",
                 headers: {
-                    // Authorization: 'Bearer ' + '{{ Auth::user()->api_token }}',
+                    Authorization: 'Bearer ' + '{{ Auth::user()->api_token }}',
                 },
                 data: function ( filter ) {
                     filter.name = $( '[data-kt-user-table-filter="search"]' ).val();
@@ -421,6 +424,9 @@
             			url: "{{ route( 'api::users::destroy_bulk' ) }}",
             			method: 'delete',
             			data: { user_ids: $( '[type="checkbox"]:checked' ).serializeArray() },
+		                headers: {
+		                    Authorization: 'Bearer ' + '{{ Auth::user()->api_token }}',
+		                },
             			success: function( response ) {
             				if( response.code == 201 ) {
 			                	$( '[type="checkbox"]' ).prop( 'checked', false );
