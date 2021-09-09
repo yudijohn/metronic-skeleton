@@ -56,6 +56,7 @@ class UserController extends Controller
     public function store( Request $request )
     {
         DB::beginTransaction();
+        $request->merge( [ 'password' => bcrypt( $request->password ) ] );
         $user = User::create( $request->all() );
         if( $request->has( 'role_id' ) ) {
             $user->roles()->sync( $request->role_id );
