@@ -114,7 +114,7 @@
 									<!--begin::Radio-->
 									<div class="form-check form-check-custom form-check-solid">
 										<!--begin::Input-->
-										<input class="form-check-input me-3" name="user_role" type="radio" value="{{ $role->id }}" id="kt_modal_update_role_option_{{ $key }}" />
+										<input class="form-check-input me-3" name="role_id" type="radio" value="{{ $role->id }}" id="kt_modal_update_role_option_{{ $key }}" />
 										<!--end::Input-->
 										<!--begin::Label-->
 										<label class="form-check-label" for="kt_modal_update_role_option_{{ $key }}">
@@ -163,6 +163,7 @@
 		    return {
 		        init: function() {
 		            (() => {
+		                const i = t.querySelector( '[data-kt-users-modal-action="submit"]' );
 		                var o = FormValidation.formValidation(e, {
 		                    fields: {
 		                        name: {
@@ -200,7 +201,7 @@
 		                    }
 		                } );
 
-		                $( '[data-kt-users-modal-action="submit"]' ).click( function( t ) {
+		                $( i ).click( function( t ) {
 		                	t.preventDefault();
 		                	o.validate().then( function( t ) {
 		                		if( "Valid" == t ) {
@@ -209,7 +210,7 @@
 		                			$.ajax( {
 		                				url: "{{ route( 'api::users::store' ) }}",
 		                				method: 'post',
-		                				data: $( '#kt_modal_add_user_form' ).serialize(),
+		                				data: $( e ).serialize(),
 		                				success: function( response ) {
 				                            i.removeAttribute( "data-kt-indicator" );
 				                            i.disabled = !1;
@@ -244,7 +245,6 @@
 		                    } );
 		                } );
 
-		                const i = t.querySelector( '[data-kt-users-modal-action="submit"]' );
 		                t.querySelector('[data-kt-users-modal-action="cancel"]').addEventListener("click", (t => {
 		                    t.preventDefault(), Swal.fire({
 		                        text: "Are you sure you would like to cancel?",

@@ -110,7 +110,7 @@
 					<!--end::Menu 1-->
 					<!--end::Filter-->
 					<!--begin::Add user-->
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ym_modal_create_edit_user">
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
 						<!--begin::Svg Icon | path: icons/duotone/Navigation/Plus.svg-->
 						<span class="svg-icon svg-icon-2">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -241,7 +241,8 @@
 		<!--end::Card body-->
 	</div>
 	<!--end::Card-->
-	@include( 'metronic::users.create_edit_modal' )
+	@include( 'metronic::users.create_modal' )
+	@include( 'metronic::users.edit_modal' )
 @endsection
 @push( 'styles' )
 	{{ Html::style( 'plugins/yudijohn/metronic/plugins/datatables/datatables.bundle.css' ) }}
@@ -250,13 +251,49 @@
 	{{ Html::script( 'plugins/yudijohn/metronic/plugins/datatables/datatables.bundle.js' ) }}
 	{{ Html::script( 'plugins/yudijohn/metronic/js/datatable-delete.js' ) }}
 	<script type="text/javascript">
-		datatableDeleteCallback = () => {
+		KTUsersAddUser.storeUserCallback = function() {
 			user_datatable.ajax.reload();
 		}
 
-		// KTUsersAddUser.storeUserCallback = function() {
-		// 	user_datatable.ajax.reload();
-		// }
+		YMUsersEditUser.updateUserCallback = function() {
+			user_datatable.ajax.reload();
+		}
+
+		const deleteUserUrl = "{{ route( 'api::users::destroy', ':_id' ) }}";
+		deleteUser = ( row ) => {
+    		data = user_datatable.row( row ).data();
+			Swal.fire( {
+		        text: "Are you sure you want to delete " + data.name + "?",
+		        icon: "warning",
+		        showCancelButton: !0,
+		        buttonsStyling: !1,
+		        confirmButtonText: "Yes, delete!",
+		        cancelButtonText: "No, cancel",
+		        customClass: {
+		            confirmButton: "btn fw-bold btn-danger",
+		            cancelButton: "btn fw-bold btn-active-light-primary"
+		        }
+		    } ).then( function( t ) {
+		        if( t.value ) {
+					$.ajax( {
+						url: deleteUserUrl.replace( ':_id', data.id ),
+						method: 'delete',
+						success: function( response ) {
+							user_datatable.ajax.reload();
+							Swal.fire( {
+		                        text: response.message,
+		                        icon: "success",
+		                        buttonsStyling: !1,
+		                        confirmButtonText: "Ok, got it!",
+		                        customClass: {
+		                            confirmButton: "btn btn-primary"
+		                        }
+		                    } )
+						}
+					} );
+		        }
+		    } );
+		}
 
 		$( document ).on( 'click', '#kt_table_users [type="checkbox"]', function() {
             setTimeout( function() {
@@ -323,10 +360,34 @@
 					</div>`;
             		return row.avatar;
             	} },
-            	{ data: 'role', render: function( value ) {
+            	{ data: 'role_name', render: function( value ) {
             		if( value ) return value; return '-';
             	}, orderable: false },
-            	{ data: 'action', class: 'text-end', orderable: false }
+            	{ data: null, class: 'text-end', render: function( value, type, row, meta ) {
+            		return `<a href="javascript:;" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
+					    Actions
+					    <span class="svg-icon svg-icon-5 m-0">
+					        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+					            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+					                <polygon points="0 0 24 0 24 24 0 24"></polygon>
+					                <path d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999)"></path>
+					            </g>
+					        </svg>
+					    </span>
+					</a>
+					<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+					    <div class="menu-item px-3">
+					        <a href="javascript:;" class="menu-link px-3" data-kt-users-table-filter="edit_row" onclick="editUser(${ meta.row })">
+					            Edit
+					        </a>
+					    </div>
+				        <div class="menu-item px-3">
+				            <a class="menu-link px-3" onclick="deleteUser(${ meta.row })">
+				                Delete
+				            </a>
+				        </div>
+					</div>`;
+            	}, orderable: false }
         	],
         }).on( 'draw', function() {
             n();

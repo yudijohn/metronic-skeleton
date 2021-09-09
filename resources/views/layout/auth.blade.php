@@ -103,6 +103,9 @@
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->
 		<script src="{{ asset( 'plugins/yudijohn/metronic/js/sign-in/general.js' ) }}"></script>
+		<script type="text/javascript">
+			KTSigninGeneral.signInUrl = "{{ route( 'api::auths::store' ) }}";
+		</script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
 	</body>

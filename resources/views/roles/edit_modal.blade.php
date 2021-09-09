@@ -67,7 +67,7 @@
 		        		e.querySelector( 'input[name=id]' ).value = role[ 'id' ];
 		        		e.querySelector( 'input[name=name]' ).value = role[ 'name' ];
 		        		$.each( role.permissions, function( idx, permission ) {
-		        			e.querySelector( 'input[name="permissions[' + idx + ']"]' ).checked = true;
+		        			e.querySelector( 'input[name="permissions[]"][value="' + permission + '"]' ).checked = true;
 		        		} );
 		        	} );
 

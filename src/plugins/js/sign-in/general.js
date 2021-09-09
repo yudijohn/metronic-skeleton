@@ -29,32 +29,47 @@ var KTSigninGeneral = function() {
                         rowSelector: ".fv-row"
                     })
                 }
-            }), e.addEventListener("click", (function(n) {
-                n.preventDefault(), i.validate().then((function(i) {
-                    "Valid" == i ? (e.setAttribute("data-kt-indicator", "on"), e.disabled = !0, setTimeout((function() {
-                        t.submit();
-                        // e.removeAttribute("data-kt-indicator"), e.disabled = !1, Swal.fire({
-                        //     text: "You have successfully logged in!",
-                        //     icon: "success",
-                        //     buttonsStyling: !1,
-                        //     confirmButtonText: "Ok, got it!",
-                        //     customClass: {
-                        //         confirmButton: "btn btn-primary"
-                        //     }
-                        // }).then((function(e) {
-                        //     e.isConfirmed && (t.querySelector('[name="email"]').value = "", t.querySelector('[name="password"]').value = "")
-                        // }))
-                    }), 2e3)) : Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
-                        icon: "error",
-                        buttonsStyling: !1,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
-                    })
-                }))
-            }))
+            }), e.addEventListener("click", function(n) {
+                n.preventDefault(), i.validate().then( function( i ) {
+                    if( "Valid" == i ) {
+                        e.setAttribute( "data-kt-indicator", "on" );
+                        e.disabled = !0;
+                        $.ajax( {
+                            url: KTSigninGeneral.signInUrl,
+                            method: 'post',
+                            data: $( t ).serialize(),
+                            success: function( response ) {
+                                e.removeAttribute( "data-kt-indicator" );
+                                e.disabled = !1;
+                                if( response.code == 201 ) {
+                                    t.submit();
+                                } else {
+                                    console.log( response );
+                                    Swal.fire( {
+                                        text: response.message,
+                                        icon: "error",
+                                        buttonsStyling: !1,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    } );
+                                }
+                            }
+                        } );
+                    } else {
+                        Swal.fire( {
+                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            icon: "error",
+                            buttonsStyling: !1,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn btn-primary"
+                            }
+                        } );
+                    }
+                } )
+            })
         }
     }
 }();

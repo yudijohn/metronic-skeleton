@@ -34,15 +34,16 @@ class UserController extends Controller
         }
         return DataTables::eloquent( $users )->addColumn( 'avatar', function() {
             return asset( 'plugins/yudijohn/metronic/img/avatar.png' );
-        } )->addColumn( 'role', function( $user ) {
+        } )->addColumn( 'role_id', function( $user ) {
+            if( ! $user->roles->isEmpty() ) {
+                return $user->roles()->first()->id;
+            }
+            return null;
+        } )->addColumn( 'role_name', function( $user ) {
             if( ! $user->roles->isEmpty() ) {
                 return $user->roles()->first()->name;
             }
             return null;
-            return '-';
-        } )->addColumn( 'action', function( $user ) use( $request ) {
-            $delete_url = route( 'api::users::destroy', $user->id );
-            return view( 'metronic::action_buttons', compact( 'delete_url' ) );
         } )->toJson();
     }
 
@@ -56,6 +57,9 @@ class UserController extends Controller
     {
         DB::beginTransaction();
         $user = User::create( $request->all() );
+        if( $request->has( 'role_id' ) ) {
+            $user->roles()->sync( $request->role_id );
+        }
         DB::commit();
         return response()->json( [
             'code' => 201,
@@ -77,10 +81,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( User $user )
     {
         //
     }
@@ -89,12 +93,22 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update( Request $request, User $user )
     {
-        //
+        DB::beginTransaction();
+        $user->update( $request->all() );
+        if( $request->has( 'role_id' ) ) {
+            $user->roles()->sync( $request->role_id );
+        }
+        DB::commit();
+        return response()->json( [
+            'code' => 201,
+            'message' => 'User ' . $user->name . ' has updated.',
+            'data' => $user
+        ], 201 );
     }
 
     /**
