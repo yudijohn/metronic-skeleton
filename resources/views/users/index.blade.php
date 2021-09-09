@@ -320,10 +320,6 @@
         var user_datatable = $( '#kt_table_users' ).DataTable( {
 			lengthChange : !1,
 			info: !1,
-            responsive: !0,
-            searchDelay: 500,
-            processing: !0,
-            serverSide: !0,
             order: [ [ 1, 'asc' ] ],
             select: {
                 style: 'os',
