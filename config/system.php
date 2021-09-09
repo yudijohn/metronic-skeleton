@@ -13,6 +13,11 @@ return [
     |
     */
 
+    'models' => [
+        'user' => yudijohn\Metronic\Models\User::class,
+        'role' => yudijohn\Metronic\Models\Role::class
+    ],
+
     'permissions' => [
 
         'user' => [ 'read', 'create', 'update', 'delete' ],

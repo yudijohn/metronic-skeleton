@@ -4,7 +4,6 @@ namespace yudijohn\Metronic\Controllers\Api;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use yudijohn\Metronic\Models\Role;
 use Illuminate\Http\Request;
 use DataTables;
 use DB;
@@ -18,7 +17,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::with( 'users' )->orderBy( 'name', 'desc' )->get();
+        $roles = config( 'system.models.role' )::with( 'users' )->orderBy( 'name', 'desc' )->get();
         return response()->json( [
             'code' => 200,
             'data' => $roles
@@ -35,7 +34,7 @@ class RoleController extends Controller
     {
         $request->merge( [ 'slug' => 'test5' ] );
         DB::beginTransaction();
-        $role = Role::create( $request->all() );
+        $role = config( 'system.models.role' )::create( $request->all() );
         DB::commit();
         return response()->json( [
             'code' => 201,
@@ -69,12 +68,13 @@ class RoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \yudijohn\Metronic\Models\Role  $role
+     * @param  int  $role_id
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, Role $role )
+    public function update( Request $request, $role_id )
     {
         DB::beginTransaction();
+        $role = config( 'system.models.role' )::find( $role_id );
         $role->update( $request->all() );
         DB::commit();
         return response()->json( [
@@ -87,12 +87,13 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Role  $role
+     * @param  int  $role_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( Role $role )
+    public function destroy( $role_id )
     {
         DB::beginTransaction();
+        $role = config( 'system.models.role' )::find( $role_id );
         $role->delete();
         DB::commit();
         return response()->json( [

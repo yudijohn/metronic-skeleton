@@ -283,7 +283,7 @@
 			        		e.querySelector( 'input[name=id]' ).value = data.id;
 			        		e.querySelector( 'input[name=name]' ).value = data.name;
 			        		e.querySelector( 'input[name=email]' ).value = data.email;
-			        		e.querySelector( `input[name="role_id"]` ).checked = true;
+			        		$( e ).find( `input[name="role_id"][value=${data.role_id}]` ).attr( 'checked', true );
 		        			n.show();
 	            		}
 		            )

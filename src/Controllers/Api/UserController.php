@@ -4,8 +4,6 @@ namespace yudijohn\Metronic\Controllers\Api;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use yudijohn\Metronic\Models\User;
-use yudijohn\Metronic\Models\Role;
 use Illuminate\Http\Request;
 use DataTables;
 use DB;
@@ -20,7 +18,7 @@ class UserController extends Controller
      */
     public function datatable( Request $request )
     {
-        $users = User::query();
+        $users = config( 'system.models.user' )::query();
         if( $request->has( 'name' ) && ! empty( $request->name ) ) {
             $users->where( function( $user ) use( $request ) {
                 $user->where( 'name', 'like', '%' . $request->name . '%' );
@@ -57,7 +55,7 @@ class UserController extends Controller
     {
         DB::beginTransaction();
         $request->merge( [ 'password' => bcrypt( $request->password ) ] );
-        $user = User::create( $request->all() );
+        $user = config( 'system.models.user' )::create( $request->all() );
         if( $request->has( 'role_id' ) ) {
             $user->roles()->sync( $request->role_id );
         }
@@ -97,8 +95,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, User $user )
+    public function update( Request $request, $user_id )
     {
+        $user = config( 'system.models.user' )::find( $user_id );
         DB::beginTransaction();
         $user->update( $request->all() );
         if( $request->has( 'role_id' ) ) {
@@ -118,8 +117,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy( User $user )
+    public function destroy( $user_id )
     {
+        $user = config( 'system.models.user' )::find( $user_id );
         DB::beginTransaction();
         $user->delete();
         DB::commit();
@@ -139,7 +139,7 @@ class UserController extends Controller
     {
         DB::beginTransaction();
         foreach( $request->user_ids as $user_id ) {
-            $user = User::find( $user_id[ 'value' ] );
+            $user = config( 'system.models.user' )::find( $user_id[ 'value' ] );
             $user->delete();
         }
         DB::commit();
