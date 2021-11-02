@@ -106,6 +106,9 @@
 											<!--begin::Permissions-->
 											<div class="d-flex flex-column text-gray-600">
 												<div class="d-flex align-items-center py-2">
+												<span class="bullet bg-primary me-3"></span>${ role.permissions.length } hak akses aktif</div>
+												<!--
+												<div class="d-flex align-items-center py-2">
 												<span class="bullet bg-primary me-3"></span>All Admin Controls</div>
 												<div class="d-flex align-items-center py-2">
 												<span class="bullet bg-primary me-3"></span>View and Edit Financial Summaries</div>
@@ -119,6 +122,7 @@
 													<span class="bullet bg-primary me-3"></span>
 													<em>and 7 more...</em>
 												</div>
+												-->
 											</div>
 											<!--end::Permissions-->
 										</div>
