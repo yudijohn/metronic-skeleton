@@ -13,7 +13,10 @@ return [
     |
     */
 
-    'domain' => null,
+    'domain' => [
+        'development_prefix' => 'admin',
+        'production_url' => null
+    ],
 
     'models' => [
         'user' => yudijohn\Metronic\Models\User::class,

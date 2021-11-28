@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 $namespace = 'yudijohn\\Metronic\\Controllers\\Admin\\';
 
-Route::group( [ 'as' => 'admin::', 'middleware' => 'web' ] + ( config( 'system.domain' ) ? [ 'domain' => config( 'system.domain' ) ] : [] ), function() use( $namespace ) {
+Route::group( [
+        'as' => 'admin::', 'middleware' => 'web', 'domain' => config( 'system.domain.production_url' ),
+        'prefix' => in_array( config( 'app.env' ), [ 'local', 'staging' ] ) ? config( 'system.domain.development_prefix' ) : null
+    ], function() use( $namespace ) {
     Route::group( [ 'as' => 'auths::' ], function() use( $namespace ) {
         Route::get( 'login', [ 'as' => 'create', 'uses' => $namespace . 'AuthController@create' ] );
         Route::post( 'login', [  'as' => 'store', 'uses' => $namespace . 'AuthController@store' ] );
