@@ -13,6 +13,8 @@ return [
     |
     */
 
+    'domain' => null,
+
     'models' => [
         'user' => yudijohn\Metronic\Models\User::class,
         'role' => yudijohn\Metronic\Models\Role::class
