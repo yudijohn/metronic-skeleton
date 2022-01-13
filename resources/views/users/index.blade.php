@@ -353,7 +353,7 @@
 							</a>
 	            		</div>
 	            		<div class="d-flex flex-column">
-							<a href="` + user_show_url.replace( ':_id', row.id ) + `" class="text-gray-800 text-hover-primary mb-1">` + row.name + `</a>
+							<a href="` + user_show_url.replace( ':_id', row.id ) + `" class="text-dark fw-bolder text-hover-primary mb-1">` + row.name + `</a>
 							<span>` + row.email + `</span>
 						</div>
 					</div>`;
