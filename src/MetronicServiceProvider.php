@@ -30,7 +30,7 @@ class MetronicServiceProvider extends ServiceProvider
         $this->loadViewsFrom( __DIR__.'/../resources/views', 'metronic' );
         $this->publishes( [
             // __DIR__.'/Resources' => base_path( 'app/Http/Resources' ),
-            __DIR__.'/database/migrations' => base_path( 'database/migrations' ),
+            // __DIR__.'/database/migrations' => base_path( 'database/migrations' ),
             __DIR__.'/plugins' => base_path( 'public/plugins/yudijohn/metronic' ),
             __DIR__.'/../resources/views/layout/index_parts/aside.blade.php' => resource_path( 'views/vendor/metronic/layout/index_parts/aside.blade.php' ),
             __DIR__.'/../config/system.php' => config_path( 'system.php' ),
