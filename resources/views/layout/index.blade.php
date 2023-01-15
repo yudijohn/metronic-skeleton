@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta charset="utf-8" />
 		<!--begin::Fonts-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Page Vendor Stylesheets(used by this page)-->
 		<link href="{{ asset( 'plugins/yudijohn/metronic/plugins/fullcalendar/fullcalendar.bundle.css' ) }}" rel="stylesheet" type="text/css" />
@@ -17,67 +17,49 @@
 		<!--end::Global Stylesheets Bundle-->
     </head>
 	<!--begin::Body-->
-	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
-		<!--begin::Main-->
-		<!--begin::Root-->
-		<div class="d-flex flex-column flex-root">
+	<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+		<!--begin::Theme mode setup on page load-->
+		<script>
+			var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-theme-mode")) { themeMode = document.documentElement.getAttribute("data-theme-mode"); } else { if ( localStorage.getItem("data-theme") !== null ) { themeMode = localStorage.getItem("data-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-theme", themeMode); }
+		</script>
+		<!--end::Theme mode setup on page load-->
+		<!--begin::App-->
+		<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
 			<!--begin::Page-->
-			<div class="page d-flex flex-row flex-column-fluid">
-				<!--begin::Aside-->
-				@include( 'metronic::layout.index_parts.aside' )
-				<!--end::Aside-->
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+				<!--begin::Header-->
+				@include( 'metronic::layout.index_parts.header' )
+				<!--end::Header-->
 				<!--begin::Wrapper-->
-				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-					<!--begin::Header-->
-					@include( 'metronic::layout.index_parts.header' )
-					<!--end::Header-->
-					<!--begin::Content-->
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						<!--begin::Post-->
-						<div class="post d-flex flex-column-fluid" id="kt_post">
-							<!--begin::Container-->
-							<div id="kt_content_container" class="container">
-								@yield( 'content' )
-							</div>
-							<!--end::Container-->
-						</div>
-						<!--end::Post-->
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+					<!--begin::Sidebar-->
+					@include( 'metronic::layout.index_parts.aside' )
+					<!--end::Sidebar-->
+					<!--begin::Main-->
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+						<!--begin::Content wrapper-->
+						@yield( 'contents' )
+						<!--end::Content wrapper-->
+						<!--begin::Footer-->
+						@include( 'metronic::layout.index_parts.footer' )
+						<!--end::Footer-->
 					</div>
-					<!--end::Content-->
-					<!--begin::Footer-->
-					@include( 'metronic::layout.index_parts.footer' )
-					<!--end::Footer-->
+					<!--end:::Main-->
 				</div>
 				<!--end::Wrapper-->
 			</div>
 			<!--end::Page-->
 		</div>
-		<!--end::Root-->
-		<!--begin::Scrolltop-->
-		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
-			<!--begin::Svg Icon | path: icons/duotone/Navigation/Up-2.svg-->
-			<span class="svg-icon">
-				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-						<polygon points="0 0 24 0 24 24 0 24" />
-						<rect fill="#000000" opacity="0.5" x="11" y="10" width="2" height="10" rx="1" />
-						<path d="M6.70710678,12.7071068 C6.31658249,13.0976311 5.68341751,13.0976311 5.29289322,12.7071068 C4.90236893,12.3165825 4.90236893,11.6834175 5.29289322,11.2928932 L11.2928932,5.29289322 C11.6714722,4.91431428 12.2810586,4.90106866 12.6757246,5.26284586 L18.6757246,10.7628459 C19.0828436,11.1360383 19.1103465,11.7686056 18.7371541,12.1757246 C18.3639617,12.5828436 17.7313944,12.6103465 17.3242754,12.2371541 L12.0300757,7.38413782 L6.70710678,12.7071068 Z" fill="#000000" fill-rule="nonzero" />
-					</g>
-				</svg>
-			</span>
-			<!--end::Svg Icon-->
-		</div>
-		<!--end::Scrolltop-->
-		<!--end::Main-->
+		<!--end::App-->
 		<!--begin::Javascript-->
-		<!--begin::Global Javascript Bundle(used by all pages)-->
+		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 		<script src="{{ asset( 'plugins/yudijohn/metronic/global/plugins.bundle.js' ) }}"></script>
 		<script src="{{ asset( 'plugins/yudijohn/metronic/js/scripts.bundle.js' ) }}"></script>
 		<!--end::Global Javascript Bundle-->
-		<!--begin::Page Vendors Javascript(used by this page)-->
+		<!--begin::Vendors Javascript(used for this page only)-->
 		<script src="{{ asset( 'plugins/yudijohn/metronic/plugins/fullcalendar/fullcalendar.bundle.js' ) }}"></script>
 		@stack( 'scripts' )
-		<!--end::Page Vendors Javascript-->
+		<!--end::Vendors Javascript-->
 		<!--end::Javascript-->
 	</body>
 	<!--end::Body-->
