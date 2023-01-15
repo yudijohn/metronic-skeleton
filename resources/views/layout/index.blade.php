@@ -38,7 +38,7 @@
 					<!--begin::Main-->
 					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
 						<!--begin::Content wrapper-->
-						@yield( 'contents' )
+						@yield( 'content' )
 						<!--end::Content wrapper-->
 						<!--begin::Footer-->
 						@include( 'metronic::layout.index_parts.footer' )
