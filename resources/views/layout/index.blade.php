@@ -49,7 +49,9 @@
     						<!--end::Toolbar-->
 							<!--begin::Content-->
 							<div id="kt_app_content" class="app-content flex-column-fluid">
+    							<!--begin::Content container-->
 								@yield( 'content' )
+    							<!--end::Content container-->
 							</div>
 							<!--end::Content-->
 						</div>
