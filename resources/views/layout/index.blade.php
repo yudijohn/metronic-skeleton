@@ -38,7 +38,21 @@
 					<!--begin::Main-->
 					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
 						<!--begin::Content wrapper-->
-						@yield( 'content' )
+						<div class="d-flex flex-column flex-column-fluid">
+    						<!--begin::Toolbar-->
+							<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+        						<!--begin::Toolbar container-->
+								@yield( 'toolbar' )
+        						<!--end::Toolbar container-->
+							</div>
+							<!--begin::Toolbar container-->
+    						<!--end::Toolbar-->
+							<!--begin::Content-->
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								@yield( 'content' )
+							</div>
+							<!--end::Content-->
+						</div>
 						<!--end::Content wrapper-->
 						<!--begin::Footer-->
 						@include( 'metronic::layout.index_parts.footer' )
