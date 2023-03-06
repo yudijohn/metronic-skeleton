@@ -1,64 +1,63 @@
 @extends( 'metronic::layout.index' )
-@section( 'breadcrumb' )
-    <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_header_nav'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-    	<!--begin::Title-->
-    	<h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Roles List</h1>
-    	<!--end::Title-->
-    	<!--begin::Separator-->
-    	<span class="h-20px border-gray-200 border-start mx-4"></span>
-    	<!--end::Separator-->
-    	<!--begin::Breadcrumb-->
-    	<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
-    		<!--begin::Item-->
-    		<li class="breadcrumb-item text-muted">
-    			<a href="{{ route( 'admin::home::index' ) }}" class="text-muted text-hover-primary">Home</a>
-    		</li>
-    		<!--end::Item-->
-    		<!--begin::Item-->
-    		<li class="breadcrumb-item">
-    			<span class="bullet bg-gray-200 w-5px h-2px"></span>
-    		</li>
-    		<!--end::Item-->
-    		<!--begin::Item-->
-    		<li class="breadcrumb-item text-muted">User Management</li>
-    		<!--end::Item-->
-    		<!--begin::Item-->
-    		<li class="breadcrumb-item">
-    			<span class="bullet bg-gray-200 w-5px h-2px"></span>
-    		</li>
-    		<!--end::Item-->
-    		<!--begin::Item-->
-    		<li class="breadcrumb-item text-dark">Roles List</li>
-    		<!--end::Item-->
-    	</ul>
-    	<!--end::Breadcrumb-->
+@section( 'toolbar' )
+    <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+        <!--begin::Page title-->
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <!--begin::Title-->
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                Role Management
+            </h1>
+            <!--end::Title-->
+            <!--begin::Breadcrumb-->
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">
+                    <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">Role Management</li>
+                <!--end::Item-->
+            </ul>
+            <!--end::Breadcrumb-->
+        </div>
+        <!--end::Page title-->
     </div>
 @endsection
 @section( 'content' )
-	<div id="row-role" class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-9">
-		<!--begin::Add new card-->
-		<div class="col-md-4">
-			<!--begin::Card-->
-			<div class="card h-md-100">
-				<!--begin::Card body-->
-				<div class="card-body d-flex flex-center">
-					<!--begin::Button-->
-					<button type="button" class="btn btn-clear d-flex flex-column flex-center" data-bs-toggle="modal" data-bs-target="#kt_modal_add_role">
-						<!--begin::Label-->
-						<div class="fw-bolder fs-3 text-gray-600 text-hover-primary">
-							<i class="bi bi-person-plus-fill fs-1"></i><br>
-							Add New Role
-						</div>
-						<!--end::Label-->
-					</button>
-					<!--begin::Button-->
+    <!--begin::Content container-->
+	<x-app-container>
+		<div id="row-role" class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-9">
+			<!--begin::Add new card-->
+			<div class="col-md-4">
+				<!--begin::Card-->
+				<div class="card h-md-100">
+					<!--begin::Card body-->
+					<div class="card-body d-flex flex-center">
+						<!--begin::Button-->
+						<button type="button" class="btn btn-clear d-flex flex-column flex-center" data-bs-toggle="modal" data-bs-target="#kt_modal_add_role">
+							<!--begin::Label-->
+							<div class="fw-bolder fs-3 text-gray-600 text-hover-primary">
+								<i class="bi bi-person-plus-fill fs-1"></i><br>
+								Add New Role
+							</div>
+							<!--end::Label-->
+						</button>
+						<!--begin::Button-->
+					</div>
+					<!--begin::Card body-->
 				</div>
-				<!--begin::Card body-->
+				<!--begin::Card-->
 			</div>
-			<!--begin::Card-->
+			<!--begin::Add new card-->
 		</div>
-		<!--begin::Add new card-->
-	</div>
+    </x-app-container>
+    <!--end::Content container-->
 	@include( 'metronic::roles.create_modal' )
 	@include( 'metronic::roles.edit_modal' )
 @endsection
