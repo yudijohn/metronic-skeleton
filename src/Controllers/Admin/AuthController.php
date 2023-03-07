@@ -26,8 +26,14 @@ class AuthController extends Controller
      */
     public function store( Request $request )
     {
-        if( Auth::attempt( $request->only( [ 'email', 'password' ] ) ) ) {
-            return redirect()->route( 'admin::home::index' );
+        if( $request->has( 'username' ) ) {
+            if( Auth::attempt( $request->only( [ 'username', 'password' ] ) ) ) {
+                return redirect()->route( 'admin::home::index' );
+            }
+        } else {
+            if( Auth::attempt( $request->only( [ 'email', 'password' ] ) ) ) {
+                return redirect()->route( 'admin::home::index' );
+            }
         }
         return redirect()->back()->withInput();
     }

@@ -41,7 +41,7 @@
 							<!--begin::Input group-->
 							<div class="fv-row mb-10">
 								<!--begin::Label-->
-								<label class="form-label fs-6 fw-bolder text-dark">Email</label>
+								<label class="form-label fs-6 fw-bolder text-dark">Email / Username</label>
 								<!--end::Label-->
 								<!--begin::Input-->
 								{{ Form::text( 'email', null, [ 'class' => 'form-control form-control-lg form-control-solid', 'autocomplete' => 'off' ] ) }}
