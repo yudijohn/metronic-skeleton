@@ -46,5 +46,6 @@ class MetronicServiceProvider extends ServiceProvider
 
         Blade::component( 'icon', \yudijohn\Metronic\View\Components\Icon::class );
         Blade::component( 'app-container', \yudijohn\Metronic\View\Components\AppContainer::class );
+        Blade::component( 'card', \yudijohn\Metronic\View\Components\Card::class );
     }
 }
