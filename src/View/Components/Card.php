@@ -7,13 +7,6 @@ use Illuminate\View\Component;
 class Card extends Component
 {
     /**
-     * The card class.
-     *
-     * @var string
-     */
-    public $class;
-
-    /**
      * The title.
      *
      * @var string
@@ -32,9 +25,8 @@ class Card extends Component
      *
      * @return void
      */
-    public function __construct( $class = '', $title = null, $subtitle = null )
+    public function __construct( $title = null, $subtitle = null )
     {
-        $this->class = $class;
         $this->title = $title;
         $this->subtitle = $subtitle;
     }

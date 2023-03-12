@@ -1,4 +1,4 @@
-<div class="card card-flush {{ $class }}">
+<div {{ $attributes->class( [ 'card card-flush' ] ) }}>
     @if( isset( $title ) )
         <!--begin::Header-->
         <div class="card-header pt-5">
@@ -19,8 +19,10 @@
         <!--end::Header-->
     @endif
     <!--begin::Body-->
-    <div class="card-body pt-6">
-        {{ $slot }}
-    </div>
+    @if( isset( $body ) )
+        <div {{ $body->attributes->class( [ 'card-body pt-6' ] ) }}>
+            {{ $body }}
+        </div>
+    @endif
     <!--end: Card Body-->
 </div>
