@@ -7,6 +7,13 @@ use Illuminate\View\Component;
 class AppContainer extends Component
 {
     /**
+     * The element id.
+     *
+     * @var string
+     */
+    public $id;
+
+    /**
      * The alert type.
      *
      * @var string
@@ -18,8 +25,9 @@ class AppContainer extends Component
      *
      * @return void
      */
-    public function __construct( $type = 'fluid' )
+    public function __construct( $id = 'kt_app_content_container', $type = 'fluid' )
     {
+        $this->id = $id;
         $this->type = $type;
     }
 
