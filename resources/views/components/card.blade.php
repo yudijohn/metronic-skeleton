@@ -24,11 +24,18 @@
             <!--end::Header-->
         @endif
     @endif
-    <!--begin::Body-->
+    <!--begin::Card Body-->
     @if( isset( $body ) )
         <div {{ $body->attributes->class( [ 'card-body pt-6' ] ) }}>
             {{ $body }}
         </div>
     @endif
     <!--end: Card Body-->
+    <!--begin::Card Footer-->
+    @if( isset( $footer ) )
+        <div {{ $footer->attributes->class( [ 'card-footer' ] ) }}>
+            {{ $footer }}
+        </div>
+    @endif
+    <!--end: Card Footer-->
 </div>
