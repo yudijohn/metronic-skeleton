@@ -8,11 +8,8 @@ var KTSigninGeneral = function() {
                     email: {
                         validators: {
                             notEmpty: {
-                                message: "Email address is required"
+                                message: "Email/username is required"
                             },
-                            emailAddress: {
-                                message: "The value is not a valid email address"
-                            }
                         }
                     },
                     password: {
@@ -39,12 +36,9 @@ var KTSigninGeneral = function() {
                             method: 'post',
                             data: $( t ).serialize(),
                             success: function( response ) {
-                                e.removeAttribute( "data-kt-indicator" );
-                                e.disabled = !1;
                                 if( response.code == 201 ) {
                                     t.submit();
                                 } else {
-                                    console.log( response );
                                     Swal.fire( {
                                         text: response.message,
                                         icon: "error",
@@ -55,6 +49,10 @@ var KTSigninGeneral = function() {
                                         }
                                     } );
                                 }
+                            },
+                            complete: function() {
+                                e.removeAttribute( "data-kt-indicator" );
+                                e.disabled = !1;
                             }
                         } );
                     } else {

@@ -41,7 +41,7 @@
 							<!--begin::Input group-->
 							<div class="fv-row mb-10">
 								<!--begin::Label-->
-								<label class="form-label fs-6 fw-bolder text-dark">Email</label>
+								<label class="form-label fs-6 fw-bolder text-dark">Email / Username</label>
 								<!--end::Label-->
 								<!--begin::Input-->
 								{{ Form::text( 'email', null, [ 'class' => 'form-control form-control-lg form-control-solid', 'autocomplete' => 'off' ] ) }}
@@ -56,7 +56,7 @@
 									<label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
 									<!--end::Label-->
 									<!--begin::Link-->
-									<a href="../../demo1/dist/authentication/flows/basic/password-reset.html" class="link-primary fs-6 fw-bolder" tabindex="-1">Forgot Password ?</a>
+									<a href="#" class="link-primary fs-6 fw-bolder" tabindex="-1">Forgot Password ?</a>
 									<!--end::Link-->
 								</div>
 								<!--end::Wrapper-->
