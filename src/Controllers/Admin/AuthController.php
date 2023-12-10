@@ -2,6 +2,7 @@
 
 namespace yudijohn\Metronic\Controllers\Admin;
 
+use yudijohn\Metronic\Requests\Api\AuthRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -21,13 +22,19 @@ class AuthController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \yudijohn\Metronic\Requests\Api\AuthRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( Request $request )
+    public function store( AuthRequest $request )
     {
-        if( Auth::attempt( $request->only( [ 'email', 'password' ] ) ) ) {
-            return redirect()->route( 'admin::home::index' );
+        if( $request->has( 'username' ) ) {
+            if( Auth::attempt( $request->only( [ 'username', 'password' ] ) ) ) {
+                return redirect()->route( 'admin::home::index' );
+            }
+        } else {
+            if( Auth::attempt( $request->only( [ 'email', 'password' ] ) ) ) {
+                return redirect()->route( 'admin::home::index' );
+            }
         }
         return redirect()->back()->withInput();
     }

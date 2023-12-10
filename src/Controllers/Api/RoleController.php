@@ -32,7 +32,7 @@ class RoleController extends Controller
      */
     public function store( Request $request )
     {
-        $request->merge( [ 'slug' => 'test5' ] );
+        $request->merge( [ 'slug' => $request->name ] );
         DB::beginTransaction();
         $role = config( 'system.models.role' )::create( $request->all() );
         DB::commit();
