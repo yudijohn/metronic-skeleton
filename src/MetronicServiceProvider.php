@@ -39,6 +39,7 @@ class MetronicServiceProvider extends ServiceProvider
             __DIR__.'/../resources/lang' => resource_path( 'lang/vendor/metronic' ),
         ] );
         $this->app[ 'router' ]->pushMiddlewareToGroup( 'web', Middleware\CustomForms::class );
+        $this->loadRoutesFrom( __DIR__.'/../routes/web.php' );
         $this->loadRoutesFrom( __DIR__.'/../routes/admin.php' );
         $this->loadRoutesFrom( __DIR__.'/../routes/api.php' );
         $this->mergeConfigFrom( __DIR__.'/../config/system.php', 'system' );
