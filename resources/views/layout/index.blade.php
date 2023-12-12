@@ -42,7 +42,7 @@
 						<!--begin::Content wrapper-->
 						<div class="d-flex flex-column flex-column-fluid">
 							<!--begin::Toolbar-->
-							<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+                            <div id="kt_app_toolbar" class="app-toolbar {{ View::hasSection( 'toolbar' ) ? 'py-3 py-lg-6' : 'pt-3 pt-lg-6' }}">
 								<!--begin::Toolbar container-->
 								@yield( 'toolbar' )
 								<!--end::Toolbar container-->
