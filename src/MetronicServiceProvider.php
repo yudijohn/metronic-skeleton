@@ -33,12 +33,10 @@ class MetronicServiceProvider extends ServiceProvider
             __DIR__.'/plugins' => base_path( 'public/plugins/yudijohn/metronic' ),
         ], 'plugins' );
         $this->publishes( [
-            // __DIR__.'/Resources' => base_path( 'app/Http/Resources' ),
-            // __DIR__.'/database/migrations' => base_path( 'database/migrations' ),
             __DIR__.'/../resources/views/layout/index_parts/aside.blade.php' => resource_path( 'views/vendor/metronic/layout/index_parts/aside.blade.php' ),
-            __DIR__.'/../resources/views/components/icons' => resource_path( 'views/vendor/metronic/components/icons' ),
+            __DIR__.'/../resources/views/layout/index_parts/header/title.blade.php' => resource_path( 'views/vendor/metronic/layout/index_parts/header/title.blade.php' ),
             __DIR__.'/../config/system.php' => config_path( 'system.php' ),
-            __DIR__.'/../resources/lang' => resource_path( 'lang/vendor/metronic' ),
+            // __DIR__.'/../resources/lang' => resource_path( 'lang/vendor/metronic' ),
         ], 'resources' );
         $this->app[ 'router' ]->pushMiddlewareToGroup( 'web', Middleware\CustomForms::class );
         $this->loadRoutesFrom( __DIR__.'/../routes/web.php' );
