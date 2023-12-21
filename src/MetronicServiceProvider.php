@@ -33,6 +33,7 @@ class MetronicServiceProvider extends ServiceProvider
             __DIR__.'/plugins' => base_path( 'public/plugins/yudijohn/metronic' ),
         ], 'plugins' );
         $this->publishes( [
+            __DIR__.'/../resources/views/layout/index_parts/sidebar/logo.blade.php' => resource_path( 'views/vendor/metronic/layout/index_parts/sidebar/logo.blade.php' ),
             __DIR__.'/../resources/views/layout/index_parts/aside.blade.php' => resource_path( 'views/vendor/metronic/layout/index_parts/aside.blade.php' ),
             __DIR__.'/../resources/views/layout/index_parts/header/title.blade.php' => resource_path( 'views/vendor/metronic/layout/index_parts/header/title.blade.php' ),
             __DIR__.'/../config/system.php' => config_path( 'system.php' ),
