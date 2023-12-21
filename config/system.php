@@ -13,6 +13,10 @@ return [
     |
     */
 
+    'theme' => [
+        'sidebar' => 'dark'
+    ],
+
     'domain' => [
         'development_prefix' => 'admin',
         'production_url' => null
