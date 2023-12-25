@@ -21,11 +21,11 @@ class PageLayout
      *
      * @return \Illuminate\Http\Response
      */
-    public function view( $view = '' )
+    public function view( $view = '', $data = [] )
     {
         return view( 'metronic::services.layout.default', [
             '_yms_title' => $this->title,
-            '_yms_view' => view( $view )
+            '_yms_view' => view( $view, $data )
         ] );
     }
 }
